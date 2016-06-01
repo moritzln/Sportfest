@@ -1,0 +1,208 @@
+<html>
+	<head>
+		<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<script src="dimas-kmeans.js"></script>
+		<style type="text/css">
+			table {
+			  border-collapse: collapse;
+			  height: 800px;
+			  width: 800px;
+			  border: 1px solid black;
+			}
+
+			td {
+				 border: 1px solid black;
+			}
+
+			.dot {
+				height: 5px;
+				width: 5px;
+				position: absolute;
+				background-color: black;
+			}
+		</style>
+
+
+		<script type="text/javascript">
+			var app = angular.module('myApp', []);
+
+
+			app.controller('dataCtrl', function($scope) {
+			  	
+
+			var colors = [
+				'blue',
+				'yellow',
+				'green',
+				'purple',
+				'orange',
+				'gray',
+				'plum',
+				'burlywood',
+				'darkgoldenrod',
+				'darkslateblue',
+				'fuchsia',
+				'indigo',
+				'mediumvioletred',
+				'orangered',
+				'powderblue',
+				'thistle',
+				'aqua',
+				'cadetblue',
+				'darkgray',
+				'darkslategray',
+				'lightgreen',
+				'magenta',
+				'midnightblue',
+				'orchid',
+				'purple',
+				'tomato',
+				'aquamarine',
+				'chartreuse',
+				'darkgreen',
+				'darkturquoise',
+				'khaki',
+				'lightpink',
+				'rebeccapurple',
+				'brown',
+				'darkcyan',
+				'forestgreen',
+				'indianred',
+				'mediumturquoise',
+				'orange',
+				'plum',
+				'burlywood',
+				'darkgoldenrod',
+				'darkslateblue',
+				'fuchsia',
+				'indigo',
+				'mediumvioletred',
+				'orangered',
+				'powderblue',
+				'thistle',
+				'aqua',
+				'cadetblue',
+				'darkgray',
+				'darkslategray',
+				'lightgreen',
+				'magenta',
+				'midnightblue',
+				'orchid',
+				'purple',
+				'tomato',
+				'aquamarine',
+				'chartreuse',
+				'darkgreen',
+				'darkturquoise',
+				'khaki',
+				'lightpink',
+				'rebeccapurple',
+				'brown',
+				'darkcyan',
+				'forestgreen',
+				'indianred',
+				'mediumturquoise',
+				'orange',
+				'plum',
+				'burlywood',
+				'darkgoldenrod',
+				'darkslateblue',
+				'fuchsia',
+				'indigo',
+				'mediumvioletred',
+				'orangered',
+				'powderblue',
+				'thistle',
+				'aqua',
+				'cadetblue',
+				'darkgray',
+				'darkslategray',
+				'lightgreen',
+				'magenta',
+				'midnightblue',
+				'orchid',
+				'purple',
+				'tomato',
+				'aquamarine',
+				'chartreuse',
+				'darkgreen',
+				'darkturquoise',
+				'khaki',
+				'lightpink',
+				'rebeccapurple',
+
+
+			];
+
+			function createRandomData(dataSize) {
+
+				var data = [];
+
+				for (var i = 0; i < dataSize; i++) {
+					data.push(createRandomPoint(2, -75, 75));
+				};
+
+				return data;
+			}
+			  	$scope.getClusters = function() {
+
+			  		if ($scope.numberOfClusters && $scope.numberOfClusters != '' && $scope.numberOfClusters > 0) {
+			  			$scope.clusters = getClusters(data, { numberOfClusters : $scope.numberOfClusters })
+			  		} else {
+			  			$scope.clusters = getClusters(data)
+			  		}	
+			  	}
+
+			  	$scope.getColor = function (number) {
+			  		return colors[number];		
+			  	}
+
+			  	$scope.setRandomData = function() {
+			  		data = createRandomData($scope.dataSize);
+
+				  	$scope.clusters = [
+				  		{
+				  			data: data
+				  		}
+				  	];
+			  	}
+
+				$scope.dataSize = 500;
+			  	var data = [];
+			  	$scope.setRandomData();
+
+
+
+			});
+
+
+
+		</script>
+	</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="dataCtrl">
+
+	<div ng-repeat="cluster in clusters">
+		<div ng-repeat="dot in cluster.data">
+			<div class="dot" ng-style="{ left: dot[0]*5+405, top: dot[1]*5+405, 'background-color' : getColor(clusters.indexOf(cluster)) }"></div>
+		</div>
+	</div>
+
+			
+		<input type="text" size="2" ng-model="dataSize" value="500" />
+		<input type="button" value="Random"  ng-click="setRandomData()" />
+		<table >
+			<tr>
+				<td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td>
+			</tr>
+		</table>
+		<input type="text" size="2" ng-model="numberOfClusters" />
+		<input type="button" value="Cluster"  ng-click="getClusters()" />
+		Clusters: {{ clusters.length}}
+	</div>
+</body>
+</html>

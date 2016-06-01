@@ -1,0 +1,5 @@
+Rights-Management:
+	1 - Able to read (clusters may restrict)
+	2 - Able to edit students (clusters may restrict)
+	3 - Administration-Panel
+	42 - MASTER-ACCOUNT

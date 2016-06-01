@@ -1,0 +1,675 @@
+
+body {
+	font-family: sans-serif;
+	margin: 0;
+}
+nav {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 300px;
+	background-color: #333;
+	/*box-shadow: 1px 0px 30px 7px rgba(0,0,0,0.75);*/
+	color: #999;
+	z-index: 8;
+	overflow: visible;
+}
+#navButton {
+	background-color: #333;
+	padding: 6px;
+	color: white;
+	width: 80px;
+	height: 80px;
+	/*border: 1px solid rgba(0,0,0,0.75);*/
+	border: none;
+	border-radius: 5px;
+	display: none;
+	position: absolute;
+	right: -100px;
+	top: 10px;
+	margin-left: 10px;
+	cursor: pointer;
+	font-size: 25px;
+}
+nav header {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 300px;
+}
+#logo {
+	position: absolute;
+	top: 20px;
+	left: 150px;
+	margin-left: -100px;
+	width: 200px;
+}
+nav #navigation {
+	position: relative;
+	width: 100%;
+	min-height: 200px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+nav #navigation li {
+	width: 100%;
+	height: 50px;
+	border-top: 1px solid rgba(30,30,30,1);
+	border-bottom: 1px solid rgba(30,30,30,1);
+	margin-top: -1px;
+	padding: 0;
+	text-align: left;
+	padding-left: 30px;
+	box-sizing: border-box;
+	cursor: pointer;
+	line-height: 50px;
+	display: flex;
+}
+.icon {
+	font-size: 30px;
+	font-weight: 900;
+	padding-right: 20px;
+	width: 30px;
+}
+nav #navigation li:hover {
+	background-color: #272727;
+}
+nav footer {
+	position: absolute;
+	bottom: 0;
+	height: 100px;
+	width: 100%;
+	text-align: center;
+	font-size: 13px;
+	color: #181818;
+}
+nav #notifications {
+	position: relative;
+	width: 100%;
+	max-height: 300px;
+	padding: 20px;
+	box-sizing: border-box;
+	min-height: 200px;
+	overflow: auto;
+}
+.notification {
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 5px;
+	color: #333;
+	font-weight: 500;
+	padding: 8px;
+	margin-bottom: 10px;
+}
+.notification .icon {
+	text-align: center;
+	padding-left: 3px;
+	padding-right: 3px;
+	float: left;
+	line-height: 100%;
+}
+.notification span {
+	display: flex;
+}
+
+main {
+	position: absolute;
+	top: 0;
+	left: 0px;
+	padding-left: 300px;
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+}
+main section {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: #e9ebeb;
+}
+#toolbox {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100px;
+	background-image: url("../img/backgrounds/12.jpg");
+	z-index: 5;
+}
+#list {
+	position: relative;
+	top: 100px;
+	left: 0;
+	background-color: #e9ebeb;
+	min-height: 300px;
+	width: 100%;
+	text-align: center;
+}
+
+.editor {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 50%;
+	background-image: url('../img/backgrounds/14.jpg');
+	background-size: 450%;
+	z-index: 9;
+	display: none;
+	overflow: auto;
+}
+#studentPic, #clusterPic {
+	position: absolute;
+	top: 60px;
+	left: 60px;
+	width: 200px;
+	height: 200px;
+	background-size: cover;
+	border-radius: 50%;
+	color: white;
+	font-size: 150px;
+	line-height: 200px;
+	text-align: center;
+	vertical-align: center;
+}
+#studentInfo, #clusterInfo {
+	position: absolute;
+	top: 60px;
+	left: 290px;
+	height: 200px;
+}
+#studentFirstName, #studentName, #clusterName {
+	font-size: 60px;
+	line-height: 80px;
+	font-weight: 800;
+	color: white;
+}
+#studentYear, #clusterLeader {
+	margin-top: 20px;
+	line-height: 30px;
+	font-size: 20px;
+	font-family: monospace;
+	color: #ccc;
+}
+#studentCourse, #clusterSize {
+	margin-top: 10px;
+	font-size: 40px;
+	font-family: monospace;
+	color: #ccc;
+}
+#results, #clusterProgress {
+	position: relative;
+	top: 10px;
+	left: 60px;
+}
+#clusterProgress {
+	color: white;
+	font-size: 1.5em;
+	-webkit-border-horizontal-spacing: 40px;
+	-webkit-border-vertical-spacing: 20px;
+}
+.sportIcon {
+	width: 80px;
+}
+#results input {
+	border-radius: 5px;
+	padding: 10px;
+	border: none;
+}
+#results td {
+	padding-right: 20px;
+}
+#results .requirements {
+	font-weight: 700;
+	font-size: 16px;
+}
+#closeEditor {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 30px;
+	cursor: pointer;
+	font-weight: 900;
+	position: absolute;
+	z-index: 999;
+}
+.editorTools{
+	position: relative;
+	top: 50px;
+	left: 50px;
+}
+.editorTools button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	height: 50px;
+	line-height: 50px;
+	display: flex;
+	color: white;
+	font-size: 22px;
+}
+#editorInfo {
+	position: relative;
+	height: 300px;
+}
+[contenteditable=true] {
+	box-shadow: 0 0 20px 0px rgb(36, 54, 64);
+}
+input:disabled{
+	background-color: #ccc;
+}
+
+.entry, .controlButton {
+	width: 100%;
+	position: relative;
+	height: 82px;
+	background-color: #e9ebeb;
+	border-bottom: 1px solid rgba(44,71,111,0.2);
+	cursor: pointer;
+}
+.entry:hover, .controlButton:hover {
+	background-color: #d8dcdc;
+}
+.entry.active {
+	background-color: #b5bbbb;
+}
+.imgCon {
+	height: 70px;
+	width: 70px;
+	top: 6px;
+	left: 10px;
+	position: relative;
+	margin-right: 25px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: block;
+	margin: 0 !important;
+	background-image: url("../img/backgrounds/s10.jpg");
+	background-size: cover;
+	color: white;
+	font-size: 50px;
+	line-height: 70px;
+	text-align: center;
+	vertical-align: center;
+}
+.hover:hover{
+	color: #999;
+	-webkit-filter: brightness(3);
+}
+.listName {
+	position: absolute;
+	left: 130px;
+	height: 100%;
+	top: 0;
+	display: block;
+	line-height: 82px;
+	font-weight: 500;
+	font-size: 20px;
+}
+.entry-complete {
+	position: absolute;
+    right: 50px;
+    height: 100%;
+    top: 0;
+    display: block;
+    line-height: 82px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#search {
+	position: relative;
+	top: 25px;
+	height: 50px;
+	border-radius: 5px;
+	border: none;
+	left: 50px;
+	width: 500px;
+	padding: 10px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+#clusterSelection {
+	position: relative;
+	left: 25px;
+	width: 130px;
+	height: 50px;
+	border-radius: 5px;
+	border: none;
+	padding: 10px;
+	top: 25px;
+	font-size: 20px;
+}
+
+
+#login {
+	background-image: url("../img/backgrounds/sw3.jpg");
+	background-size: cover;
+	left: 0;
+	width: 100%;
+	top: 0;
+	height: 100%;
+	position: fixed;
+	z-index: 9;
+	overflow: hidden;
+}
+#loginBox {
+	position: absolute;
+	height: 550px;
+	width: 300px;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -275px;
+	background: linear-gradient(to bottom, rgba(117, 117, 117, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+#loginPic {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 300px;
+	padding: 30px;
+	box-sizing: border-box;
+	background-image: url("../img/logo2.png");
+	background-size: 70%;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.inputRow {
+	position: relative;
+	top: 40px;
+	width: 250px;
+	left: 25px;
+	height: 40px;
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+	padding: 5px;
+	color: white;
+	display: flex;
+	line-height: 40px;
+}
+.inputRow .icon {
+	line-height: 40px;
+}
+.logInput {
+	background-color: transparent;
+	height: 40px;
+	border: none;
+	font-size: 16px;
+	color: white;
+}
+.logInput:focus {
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+.logInput:focus > .inputRow {
+	border-bottom: 1px solid rgba(255,255,255,1);
+}
+#loginButton, #new_user_button {
+	width: 250px;
+	left: 25px;
+	height: 40px;
+	background-color: rgb(30,130,255);
+	border-radius: 20px;
+	position: relative;
+	top: 60px;
+	border: none;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+}
+#onlineBox {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background-color: #E7162C;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	line-height: 40px;
+}
+#loginButton:focus {
+	outline: none;
+}
+.no-outline:focus {
+	outline: none;
+}
+#loginButton:active {
+	background-color: rgb(0,114,255);
+}
+
+#logout {
+	background-color: transparent;
+	border: none;
+	display: inline;
+	padding-bottom: 10px;
+	cursor: pointer;
+}
+#logout img {
+	width: 40px;
+	-webkit-filter: brightness(0.1);
+}
+#logout img:active {
+	width: 40px;
+	-webkit-filter: brightness(0.05);
+}
+
+.box {
+	border: 1px solid rgba(0,0,0,0.2);
+	padding: 10px;
+	margin: 10px;
+}
+#timetable {
+	top: 0;
+	left: 0;
+	height: 40%;
+	width: 55%;
+	float: left;
+}
+#clock {
+	top: 0;
+	right: 0;
+	width: 33%;
+	height: 40%;
+	float: left;
+}
+#clusters {
+	float: left;
+	height: 50%;
+	width: 92%;
+}
+
+#admin {
+	background-color: #e9ebeb;
+	background-size: cover;
+}
+.bubble {
+	width: 200px;
+	height: 200px;
+	margin-top: 50px;
+	margin-
+}
+#home {
+	background-image: url("../img/backgrounds/3.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	overflow: auto;
+}
+#homeContent {
+	width: 500px;
+	height: 500px;
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	margin-left: -250px;
+	margin-top: -250px;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+}
+#homeContent h1 {
+	font-size: 4em;
+}
+}
+#clusterPar {
+	font-size: 16px;
+	padding-bottom: 10px;
+}
+
+#userPic {
+    width: 30%;
+    left: 35%;
+    margin-top: 50px;
+    position: relative;
+}
+#userEditor .inputRow {
+	width: 50%;
+	left: 25%;
+}
+#userEditor .inputRow input {
+	text-align: center;
+	width: 100%;
+}
+#userEditor #new_user_button {
+	width: 30%;
+	left: 35%;
+}
+#userEditor select {
+	position: relative;
+	width: 20%;
+	left: 40%;
+}
+#userEditor select:focus {
+	color: black;
+}
+
+@media (min-width: 1000px) {
+	nav {
+		left: 0 !important;
+	}
+}
+
+@media (max-width: 1000px), handheld{
+	.editor {
+		position: fixed;
+		width: 100%;
+		min-height: 640px;
+		overflow: auto;
+	}
+	body {
+		overflow: auto;
+	}
+	nav {
+		left: -300px;
+		transition: left 1s;
+		min-height: 600px;
+	}
+	main {
+		padding-left: 0;
+		transition: left 1s;
+	}
+	#navButton {
+		display: block;
+	}
+	#search {
+		position: absolute;
+		left: 0;
+		top: 100px;
+		width: 100%;
+		margin: 0;
+	}
+	#clusterSelection {
+		background-color: #333;
+		padding: 6px;
+		color: white;
+		width: 200px;
+		height: 80px;
+		/*border: 1px solid rgba(0,0,0,0.75);*/
+		border: none;
+		border-radius: 5px;
+		position: relative;
+		top: 10px;
+		left: 120px;
+		margin-left: 10px;
+		cursor: pointer;
+		font-size: 25px;
+		text-align: center;
+	}
+	#loginBox {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		margin: 0;
+	}
+	#loginPic {
+		height: 50%;
+		width: 100%;
+		background-size: contain;
+	}
+	.inputRow {
+		width: 90% !important;
+		left: 5% !important;
+		height: 30px;
+		padding-top: 30px;
+		top: 0;
+		max-width: 500px;
+		text-align: center;
+	}
+	.inputRow input{
+		width: 90%;
+		text-align: center;
+	}
+	#loginButton, #new_user_button {
+		width: 90%;
+		left: 5%;
+	}
+	#list {
+		top: 150px;
+	}
+	#studentPic, #clusterPic {
+		width: 100px;
+		height: 100px;
+		left: 20px;
+		font-size: 50px;
+		line-height: 100px;
+	}
+	#studentInfo, #clusterInfo {
+		left: 140px;
+		height: 100px;
+	}
+	#studentFirstName, #studentName, #clusterName{
+		font-size: 25px;
+		line-height: 35px;
+	}
+	#studentCourse, #studentYear, #clusterSize {
+		font-size: 18px;
+	}
+	#results, #clusterProgress {
+		top: 10px;
+		left: 20px;
+	}
+	.resInput {
+		min-width: 70px;
+	}
+	.box {
+		width: 90% !important;
+		margin-left: 0;
+		margin-right: 0;
+		position: relative !important;
+		left: 5% !important;
+	}
+	#homeContent {
+		width: 100%;
+		padding: 10px;
+		font-size: 2em;
+		margin: 0;
+		top: 10%;
+		left: 0;
+		box-sizing: border-box;
+	}
+}

@@ -1,0 +1,9 @@
+var control = {};
+control.cluster = function(){global.store.tournament.cluster(store.students)};
+control.exportCSV = function(){store.export_csv()};
+control.importCSV = function(file){store.importCSV(file)};
+control.clearStore = function(){store.reset()};
+control.createUser = function(username, password, rights, clusters, ws){store.createUser(username, password, rights, clusters, ws)};
+control.saveCourse = function(course){store.export_course(course)};
+control.changeCluster = function(sid, newCluster){global.store.tournament.changeCluster(sid, newCluster)};
+module.exports = control;

@@ -1,0 +1,159 @@
+<html>
+	<head>
+		<title>Sportfest</title>
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="shortcut icon" href="img/favicon.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	</head>
+	<body>
+		<nav id="nav">
+			<header>
+				<img id="logo" src="img/logo2.png" onerror="this.onerror=null; this.src='img/logo.png'">
+			</header>
+			<ul id="navigation">
+				<!--<li onclick="page('home')"><span class="icon">&#9751;</span>Home</li>-->
+				<li onclick="page('listView')"><span class="icon">&#9780;</span>Wettkampf</li>
+				<li onclick="page('clusterView')"><span class="icon">&#9780;</span>Riegen</li>
+				<li id="adminMenu" onclick="page('admin')"><span class="icon">&#9997;</span>Administration</li>
+			</ul>
+			<div id="notifications">
+
+			</div>
+			<footer>
+				<button class="no-outline" id="logout"><img src="img/logout.svg" onclick="logout();"></button><br>
+				&copy; 2016 by Moritz L&uuml;bken<br>
+				moritz@luebken.de
+			</footer>
+			<button id="navButton" onclick="if($('nav').css('left') == '-300px'){$('nav').css('left', '0')}else{$('nav').css('left', '-300px')}">&#9776;</button>
+		</nav>
+		<main>
+			<section id="login">
+				<div id="loginBox">
+					<div id="onlineBox">Offline</div>
+					<div id="loginPic"></div>
+					<span class="inputRow"><input type="text" name="username" class="logInput" value="Nutzername" onfocus="if(this.value == 'Nutzername'){this.value=''}" onblur="if(this.value==''){this.value='Nutzername'}" onkeypress="enter(event, login);"></span>
+					<span class="inputRow"><input type="text" name="password" class="logInput" value="Passwort" onfocus="if(this.value == 'Passwort'){this.value=''; this.type='password'}" onblur="if(this.value==''){this.value='Passwort'; this.type='text'}" onkeypress="enter(event, login);"></span>
+					<button id="loginButton" onclick="login();">Login</button>
+				</div>
+			</section>
+			<section id="home" style="display: none;">
+				<div id="homeContent">
+					<h1>Herzlich Willkommen!</h1>
+					<p>
+						Unter "Wettkampf" k&ouml;nnen Sie die Ergebnisse eingeben, Daten bearbeiten und Riegen einsehen.
+					</p>
+					<!--<span id="clusterNum"></span><br>
+					<span id="clusterPar"></span>-->
+				</div>
+			</section>
+			<section id="listView" style="display: none;">
+				<div id="toolbox">
+					<select id="clusterSelection" onchange="filterByCluster(this.value)">
+						<option value="all">Alle</option>
+					</select>
+					<input type="search" id="search" onchange="filterByName(this.value)" value="Suche" onfocus="if(this.value == 'Suche'){this.value=''}" onblur="if(this.value==''){this.value='Suche'}">
+				</div>
+				<div id="list">
+					<br><br><br>
+					<h1>Ooops, it seems like there's no connection to the server...</h1>
+					<h5>Please check your network connection and the state of the server</h5>
+				</div>
+				<div id="editor" class="editor">
+					<button id="closeEditor" onclick="$('#editor').hide('slide', {direction: 'top'}); saveEntry();">&#10007;</button>
+					<div id="editorInfo">
+						<div id="studentPic" data-name="studentPic" style="background-image: url('img/backgrounds/s9.jpg');" title=""></div>
+						<div id="studentInfo">
+							<span id="studentFirstName" data-name="studentFirstName" contenteditable="false"></span>&nbsp;
+							<span id="studentName" data-name="studentName" contenteditable="false"></span><br>
+							<span id="studentCourse" data-name="studentCourse" contenteditable="false"></span><br>
+							<span id="studentYear" data-name="studentYear" contenteditable="false"></span><br>
+						</div>
+					</div>
+					<div id="results">
+						<table>
+							<tr>
+								<td><img class="sportIcon" src="img/weitsprung.png" title="Weitsprung" ></td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="8" maxlength="4" name="weitsprung1" data-discipline="weitsprung"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="8" maxlength="4" name="weitsprung2" data-discipline="weitsprung"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="8" maxlength="4" name="weitsprung3" data-discipline="weitsprung"> m</td><td><span data-discipline="weitsprung" class="requirements"></span></td>
+							</tr>
+							<tr>
+								<td><img class="sportIcon" src="img/hochsprung.png" title="Hochsprung" ></td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="3" maxlength="4" name="hochsprung1" data-discipline="hochsprung"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="3" maxlength="4" name="hochsprung2" data-discipline="hochsprung"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="4" min="0" max="3" maxlength="4" name="hochsprung3" data-discipline="hochsprung"> m</td><td><span data-discipline="hochsprung" class="requirements"></span></td>
+							</tr>
+							<tr>
+								<td><img class="sportIcon" src="img/sprint.png" title="Sprint" ></td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="40" maxlength="5" name="sprint1" data-discipline="sprint"> s</td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="40" maxlength="5" name="sprint2" data-discipline="sprint"> s</td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="40" maxlength="5" name="sprint3" data-discipline="sprint"> s</td><td><span data-discipline="sprint" class="requirements"></span></td>
+							</tr>
+							<tr>
+								<td><img class="sportIcon" src="img/weitwurf.png" title="Weitwurf" ></td>
+								<td><input class="resInput" type="number" step="0.1" size="5" min="0" max="80" maxlength="4" name="weitwurf1" data-discipline="weitwurf"> m</td>
+								<td><input class="resInput" type="number" step="0.1" size="5" min="0" max="80" maxlength="4" name="weitwurf2" data-discipline="weitwurf"> m</td>
+								<td><input class="resInput" type="number" step="0.1" size="5" min="0" max="80" maxlength="4" name="weitwurf3" data-discipline="weitwurf"> m</td><td><span data-discipline="weitwurf" class="requirements"></span></td>
+							</tr>
+							<tr>
+								<td><img class="sportIcon" src="img/kugelstossen.png" title="Kugelsto&szlig;en" ></td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="12" maxlength="5" name="kugelstossen1" data-discipline="kugelstossen"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="12" maxlength="5" name="kugelstossen2" data-discipline="kugelstossen"> m</td>
+								<td><input class="resInput" type="number" step="0.01" size="5" min="0" max="12" maxlength="5" name="kugelstossen3" data-discipline="kugelstossen"> m</td><td><span data-discipline="kugelstossen" class="requirements"></span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="editorTools">
+						<button onclick="editInfos();"><span class="icon">&#9997;</span> Infos bearbeiten</button>
+						<button onclick="saveEntry();"><span class="icon">&#128190;</span> Speichern</button>
+					</div>
+				</div>
+			</section>
+			<section id="clusterView" style="display: none;">
+				<div id="clusterEditor" class="editor">
+					<button id="closeEditor" onclick="$('#clusterEditor').hide('slide', {direction: 'top'}); saveCluster();">&#10007;</button>
+					<div id="editorInfo">
+						<div id="clusterPic" style="background-image: url('img/backgrounds/s9.jpg');" title=""></div>
+						<div id="clusterInfo">
+							<span id="clusterName" contenteditable="false"></span><br>
+							<span id="clusterSize" contenteditable="false"></span><br>
+							<span id="clusterLeader" contenteditable="false"></span><br>
+						</div>
+					</div>
+					<table id="clusterProgress">
+
+					</table>
+					<div class="editorTools">
+						<button onclick="$('#clusterLeader').attr('contenteditable', 'true');"><span class="icon">&#9997;</span> Riegenf&uuml;hrer bearbeiten</button>
+						<button onclick="saveCluster();"><span class="icon">&#128190;</span> Speichern</button>
+					</div>
+				</div>
+			</section>
+			<section id="admin" style="display: none;">
+				<div class="controlButton" onclick="$('#userEditor').show('slide', {direction: 'top'});"><span class='imgCon'>+</span><span class='listName'>Nutzer hinzuf&uuml;gen</span></div>
+				<div class="controlButton" onclick="transmitt({type: 'cluster'});"><span class='imgCon'>&#8712;</span><span class='listName'>Riegen einteilen!</span></div>
+				<div class="controlButton" onclick="transmitt({type: 'importCSV', file: 'Data.csv'})"><span class='imgCon'>&#8659;</span><span class='listName'>Daten importieren</span></div>
+				<div class="controlButton" onclick="transmitt({type: 'exportCSV'})"><span class='imgCon'>&#8659;</span><span class='listName'>Daten exportieren</span></div>
+				<div class="controlButton" onclick="transmitt({type: 'reset'})"><span class='imgCon'>&#8709;</span><span class='listName'>Zur&uuml;cksetzen</span></div>
+				<div class="controlButton"><span class='imgCon hover' onclick="var c = $('#courseSelection').val(); transmitt({type: 'saveCourse', course: c});">&#128190;</span onclick="console.log('Clicked');"><span class='listName'>Excel-Datei f&uuml;r Klasse <select id="courseSelection"></select> speichern (Bitte auf das Icon vorne klicken!)</span></div>
+				<div id="userEditor" class="editor">
+					<button id="closeEditor" onclick="$('#userEditor').hide('slide', {direction: 'top'});">&#10007;</button>
+					<img src="./img/userPic.png" id="userPic">
+					<div id="new_user_data">
+						<span class="inputRow"><input type="text" name="newUsername" class="logInput" value="Nutzername" onfocus="if(this.value == 'Nutzername'){this.value=''}" onblur="if(this.value==''){this.value='Nutzername'}"></span>
+						<span class="inputRow"><input type="password" name="newPassword" class="logInput" value="Passwort" onfocus="if(this.value == 'Passwort'){this.value=''}" onblur="if(this.value==''){this.value='Passwort'}"></span>
+						<span class="inputRow"><select class="logInput" name="newRights">
+							<option value="1">1</option><option value="2">2</option><option value="3">3</option>
+						</select></span>
+						<button id="new_user_button" onclick="new_user();">Hinzuf&uuml;gen</button>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/reconnecting-websockets.js"></script>
+		<script src="js/md5.min.js"></script>
+		<script src="js/main.js" async></script>
+	</body>
+</html>
